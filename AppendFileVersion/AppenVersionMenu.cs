@@ -73,6 +73,10 @@ namespace AppendFileVersion
                 {
                     DoAppendInFolder(file);
                 }
+
+                MessageBox.Show("append success",
+                    "Success", MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
             }
             catch (Exception ex)
             {
@@ -142,17 +146,11 @@ namespace AppendFileVersion
                             if (indexOfta != -1)
                             {
                                 indexOfta += findKey.Length;
-                                var isDot = false;
                                 for (int i = indexOfta; i < totalLength; i++)
                                 {
                                     if (!str[i].Equals('\'') && !str[i].Equals('"'))
                                     {
                                         findKey += str[i];
-                                    }
-                                    else if(str[i].Equals('\''))
-                                    {
-                                        isDot = true;
-                                        break;
                                     }
                                     else
                                     {
@@ -161,7 +159,7 @@ namespace AppendFileVersion
                                 }
 
                                 var newfindKey = findKey.Replace("?", "\\?");
-                                newStr = Regex.Replace(str, newfindKey, findKey + "_" + $"{dataNowStr}" +(isDot?"'":"\""), RegexOptions.IgnoreCase);
+                                newStr = Regex.Replace(str, newfindKey, findKey + "_" + $"{dataNowStr}", RegexOptions.IgnoreCase);
                             }
                             else
                             {
@@ -213,7 +211,7 @@ namespace AppendFileVersion
         {
             OleMenuCommand oCommand = (OleMenuCommand)sender;
 
-            oCommand.Visible = _itemToHandleFunc(new[] { ".html", ".cshtml", "view" });
+            oCommand.Visible = _itemToHandleFunc(new[] { ".html", ".cshtml", "view", "views" });
         }
 
 
