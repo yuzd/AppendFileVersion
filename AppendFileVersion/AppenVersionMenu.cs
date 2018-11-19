@@ -127,11 +127,11 @@ namespace AppendFileVersion
                         var newStr = "";
                         if (lowerCase.Contains("." + key + "\""))
                         {
-                            newStr = Regex.Replace(str, "." + key + "\"", "." + key + $"?{dataNowStr}", RegexOptions.IgnoreCase);
+                            newStr = Regex.Replace(str, "." + key + "\"", "." + key + $"?{dataNowStr}\"", RegexOptions.IgnoreCase);
                         }
                         else if (lowerCase.Contains("." + key + "'"))
                         {
-                            newStr = Regex.Replace(str, "." + key + "'", "." + key + $"?{dataNowStr}", RegexOptions.IgnoreCase);
+                            newStr = Regex.Replace(str, "." + key + "'", "." + key + $"?{dataNowStr}'", RegexOptions.IgnoreCase);
                         }
                         else if (lowerCase.Contains("." + key + "?"))
                         {
@@ -142,11 +142,17 @@ namespace AppendFileVersion
                             if (indexOfta != -1)
                             {
                                 indexOfta += findKey.Length;
+                                var isDot = false;
                                 for (int i = indexOfta; i < totalLength; i++)
                                 {
                                     if (!str[i].Equals('\'') && !str[i].Equals('"'))
                                     {
                                         findKey += str[i];
+                                    }
+                                    else if(str[i].Equals('\''))
+                                    {
+                                        isDot = true;
+                                        break;
                                     }
                                     else
                                     {
@@ -155,7 +161,7 @@ namespace AppendFileVersion
                                 }
 
                                 var newfindKey = findKey.Replace("?", "\\?");
-                                newStr = Regex.Replace(str, newfindKey, findKey + "_" + $"{dataNowStr}" , RegexOptions.IgnoreCase);
+                                newStr = Regex.Replace(str, newfindKey, findKey + "_" + $"{dataNowStr}" +(isDot?"'":"\""), RegexOptions.IgnoreCase);
                             }
                             else
                             {

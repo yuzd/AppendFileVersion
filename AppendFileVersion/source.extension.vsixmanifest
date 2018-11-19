@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="AppendFileVersion.6cd36c31-2c6b-4a25-b185-5ff47598edbc" Version="1.0" Language="en-US" Publisher="zdyu" />
+        <Identity Id="AppendFileVersion.6cd36c31-2c6b-4a25-b185-5ff47598edbc" Version="1.1" Language="en-US" Publisher="zdyu" />
         <DisplayName>AppendFileVersion</DisplayName>
-        <Description xml:space="preserve">append version for script or style</Description>
-        <MoreInfo>https://github.com/yuzd</MoreInfo>
+        <Description xml:space="preserve">append version for script or style
+VSIX 统一修改 html or cshtml 中的 css标签和script标签添加统一版本号 来防止缓存</Description>
+        <MoreInfo>https://github.com/yuzd/AppendFileVersion</MoreInfo>
         <Icon>__TemplateIcon.png</Icon>
         <PreviewImage>__TemplateIcon.png</PreviewImage>
-        <Tags>1.0</Tags>
+        <Tags>1.1</Tags>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[14.0, 16.0)" />
