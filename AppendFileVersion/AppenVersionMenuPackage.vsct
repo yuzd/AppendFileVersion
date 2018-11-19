@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <Extern href="stdidcmd.h"/>
+  <Extern href="vsshlids.h"/>
+  <Commands package="guidVSPackage1">
+    <Menus>
+      <Menu guid="guidSolutionExplorerCmdSet" id="MySubMenuGroup" priority="0x202" type="Menu">
+        <Parent guid="guidSolutionExplorerCmdSet" id="MyMenuGroup" />
+        <Strings>
+          <ButtonText>AppendVersion</ButtonText>
+          <CommandName>AppendVersion</CommandName>
+        </Strings>
+      </Menu>
+    </Menus>
+
+    <Groups>
+
+      <Group guid="guidDiffCmdSet" id="MyMenuGroup" priority="0x0010">
+        <Parent guid="guidSolutionExplorerCmdSet" id="MySubMenuGroup"/>
+      </Group>
+
+      <Group guid="guidSolutionExplorerCmdSet" id="MyMenuGroup" priority="0x0001">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE"/>
+      </Group>
+
+      <Group guid="guidSolutionExplorerCmdSet" id="MySubGroup" priority="0x0001">
+        <Parent guid="guidSolutionExplorerCmdSet" id="MySubMenuGroup"/>
+      </Group>
+
+    </Groups>
+
+    <Buttons>
+
+
+      <Button guid="guidDiffCmdSet" id="cmdJavaScriptIntellisense" priority="0x0107" type="Button">
+        <Parent guid="guidDiffCmdSet" id="MyMenuGroup" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultDisabled</CommandFlag>
+        <Strings>
+          <ButtonText>Excute</ButtonText>
+        </Strings>
+      </Button>
+
+    </Buttons>
+
+
+ 
+  </Commands>
+
+  <CommandPlacements>
+    <CommandPlacement guid="guidSolutionExplorerCmdSet" id="MyMenuGroup" priority="0x0010">
+      <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_WEBITEMNODE"/>
+    </CommandPlacement>
+    <CommandPlacement guid="guidSolutionExplorerCmdSet" id="MyMenuGroup" priority="0x0010">
+      <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_WEBFOLDER"/>
+    </CommandPlacement>
+    <CommandPlacement guid="guidSolutionExplorerCmdSet" id="MyMenuGroup" priority="0x0010">
+      <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_FOLDERNODE"/>
+    </CommandPlacement>
+    <CommandPlacement guid="guidSolutionExplorerCmdSet" id="MyMenuGroup" priority="0x0100">
+      <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_WEBPROJECT"/>
+    </CommandPlacement>
+    <CommandPlacement guid="guidSolutionExplorerCmdSet" id="MyMenuGroup" priority="0x0100">
+      <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE"/>
+    </CommandPlacement>
+    <CommandPlacement guid="guidSolutionExplorerCmdSet" id="MyMenuGroup" priority="0x0100">
+      <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_SOLNNODE"/>
+    </CommandPlacement>
+  </CommandPlacements>
+
+  <Symbols>
+    <!-- This is the package guid. -->
+    <GuidSymbol name="guidVSPackage1" value="{2879d00d-4071-4d82-bc8c-cfae7a5e85cd}" />
+
+
+
+
+    <GuidSymbol name="guidDiffCmdSet" value="{8e18f0f2-4053-4b37-a6e9-9c2f5f94d73a}">
+      <IDSymbol name="MyMenuGroup" value="0x1040" />
+      <IDSymbol name="cmdJavaScriptIntellisense" value="0x1047" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidSolutionExplorerCmdSet" value="{9acf8943-17b7-4091-8f1b-417bde41b5a3}">
+      <IDSymbol name="MyMenuGroup" value="0x1060" />
+      <IDSymbol name="MySubMenuGroup" value="0x1061" />
+      <IDSymbol name="MySubGroup" value="0x1062" />
+    </GuidSymbol>
+
+  </Symbols>
+</CommandTable>
