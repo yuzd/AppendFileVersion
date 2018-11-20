@@ -1,6 +1,10 @@
 # AppendFileVersion
 VSIX 统一修改 html or cshtml 中的 css标签和script标签添加统一版本号 来防止浏览器的缓存
 
+# download
+https://marketplace.visualstudio.com/items?itemName=nainaigu.AppendFileVersion
+
+# why
 我经常会遇到下面的问题：
 在页面引用了js 或者 css
 比如：

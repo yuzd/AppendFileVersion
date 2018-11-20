@@ -52,6 +52,18 @@
       <!-- The parent of the group will be the file context menu when more than one file is selected in different projects -->
       <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_XPROJ_MULTIITEM"/>
     </CommandPlacement>
+    <CommandPlacement guid="guidSolutionExplorerCmdSet" id="MyGroupForSubmenu" priority="0xFFFF">
+      <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_WEBFOLDER"/>
+    </CommandPlacement>
+    <CommandPlacement guid="guidSolutionExplorerCmdSet" id="MyGroupForSubmenu" priority="0xFFFF">
+      <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_FOLDERNODE"/>
+    </CommandPlacement>
+    <CommandPlacement guid="guidSolutionExplorerCmdSet" id="MyGroupForSubmenu" priority="0xFFFF">
+      <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_WEBPROJECT"/>
+    </CommandPlacement>
+    <CommandPlacement guid="guidSolutionExplorerCmdSet" id="MyGroupForSubmenu" priority="0xFFFF">
+      <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE"/>
+    </CommandPlacement>
     <CommandPlacement guid="guidSolutionExplorerCmdSet" id="MySubmenu" priority="0x0001">
       <Parent guid="guidSolutionExplorerCmdSet" id="MyGroupForSubmenu"/>
     </CommandPlacement>
