@@ -55,15 +55,15 @@ namespace AppendFileVersion
         /// <param name="e"></param>
         private void CommandInvoke(object sender, EventArgs e)
         {
-            var items = ProjectHelpers.GetSelectedItemPaths(_dte).ToList();
-            if (items.Count != 1)
-            {
-                ProjectHelpers.AddError(_package, "no target was selected");
-                return;
-            }
-
             try
             {
+                var items = ProjectHelpers.GetSelectedItemPaths(_dte).ToList();
+                if (items.Count != 1)
+                {
+                    ProjectHelpers.AddError(_package, "no target was selected");
+                    return;
+                }
+
                 string file = items.ElementAt(0);
                 if (File.Exists(file))
                 {
@@ -98,91 +98,38 @@ namespace AppendFileVersion
                 var scriptlist = bodyHtml.Find("script").ToList();
                 var csslist = bodyHtml.Find("link").ToList();
                 var dataNowStr = DateTime.Now.ToString("yyyyMMddHHmm");
-                void Replace(List<IHtmlElement> list, string tag, string key)
+                void Replace(List<IHtmlElement> list, string key)
                 {
                     foreach (var item in list)
                     {
-                        var str = item.ToString();
-                        if (!body.Contains(str))
-                        {
-                            //标签写的不规范
-                            var attrs = item.Attributes();
-                            str = attrs.Where(r => r.Name.ToLower().Equals("href") || r.Name.ToLower().Equals("src"))
-                                .Select(r => r.AttributeValue).FirstOrDefault();
-                            if(string.IsNullOrEmpty(str))continue;
-                        }
-                        else if (tag.Contains("\""))
-                        {
-                            if (!str.Contains(tag) && !str.Contains(tag.Replace("\"", "'")))
-                            {
-                                continue;
-                            }
-                        }
-                        else
-                        {
-                            if (!str.Contains(tag))
-                            {
-                                continue;
-                            }
-                        }
-
+                        var attrs = item.Attributes();
+                        var str = attrs.Where(r => r.Name.ToLower().Equals("href") || r.Name.ToLower().Equals("src"))
+                            .Select(r => r.AttributeValue).FirstOrDefault();
+                        if (string.IsNullOrEmpty(str)) continue;
 
                         var lowerCase = str.ToLower();
-                        var newStr = "";
-                        if (lowerCase.Contains("." + key + "\""))
-                        {
-                            newStr = Regex.Replace(str, "." + key + "\"", "." + key + $"?{dataNowStr}\"", RegexOptions.IgnoreCase);
-                        }
-                        else if (lowerCase.Contains("." + key + "'"))
-                        {
-                            newStr = Regex.Replace(str, "." + key + "'", "." + key + $"?{dataNowStr}'", RegexOptions.IgnoreCase);
-                        }
-                        else if (lowerCase.Contains("." + key + "?"))
-                        {
-                            var findKey = "." + key + "?";
-                            var totalLength = lowerCase.Length;
-                            //找到下一个 " 或者 ‘ 之前的字符串
-                            var indexOfta = str.IndexOf(findKey, StringComparison.OrdinalIgnoreCase);
-                            if (indexOfta != -1)
-                            {
-                                indexOfta += findKey.Length;
-                                for (int i = indexOfta; i < totalLength; i++)
-                                {
-                                    if (!str[i].Equals('\'') && !str[i].Equals('"'))
-                                    {
-                                        findKey += str[i];
-                                    }
-                                    else
-                                    {
-                                        break;
-                                    }
-                                }
 
-                                var newfindKey = findKey.Replace("?", "\\?");
-                                newStr = Regex.Replace(str, newfindKey, findKey + "_" + $"{dataNowStr}", RegexOptions.IgnoreCase);
-                            }
-                            else
-                            {
-                                continue;
-                            }
-
-                        }
-                        else if (lowerCase.EndsWith("." + key))
+                        if (!lowerCase.Contains("." + key))
                         {
-                            newStr = str.Replace( "." + key, "." + key + $"?{dataNowStr}");
-
+                            continue;
                         }
 
+                        var newStr1 = str;
+                        if (lowerCase.Contains("?"))
+                        {
+                            newStr1 = str.Split('?')[0];
+                        }
+
+                        var newStr = Regex.Replace(newStr1, "\\." + key, "." + key + $"?{dataNowStr}", RegexOptions.IgnoreCase);
                         if (!string.IsNullOrEmpty(newStr))
                         {
-                           
-                            body = ReplaceFirstOccurrence(body,str, newStr);
+                            body = ReplaceFirstOccurrence(body, str, newStr);
                         }
                     }
                 }
 
-                Replace(scriptlist, "src=", "js");
-                Replace(csslist, "rel=\"stylesheet\"", "css");
+                Replace(scriptlist, "js");
+                Replace(csslist, "css");
 
                 File.WriteAllText(filePath, body);
             }
@@ -191,7 +138,7 @@ namespace AppendFileVersion
                 ProjectHelpers.AddError(_package, "file : " + filePath + "====>" + ex.ToString());
             }
         }
-        public  string ReplaceFirstOccurrence(string Source, string Find, string Replace)
+        public string ReplaceFirstOccurrence(string Source, string Find, string Replace)
         {
             int Place = Source.IndexOf(Find);
             string result = Source.Remove(Place, Find.Length).Insert(Place, Replace);
