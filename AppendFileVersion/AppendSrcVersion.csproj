@@ -23,8 +23,8 @@
     <ProjectGuid>{B147B488-6D3C-4ACF-846C-13A659058C20}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AppendFileVersion</RootNamespace>
-    <AssemblyName>AppendFileVersion</AssemblyName>
+    <RootNamespace>AppendSrcVersion</RootNamespace>
+    <AssemblyName>AppendSrcVersion</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <GeneratePkgDefFile>true</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>true</IncludeAssemblyInVSIXContainer>
